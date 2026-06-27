@@ -1,0 +1,20 @@
+Nota Técnica - Resumo das Alterações (Refatoração do Projeto)
+
+O que mudou?
+
+1. Centralização do Tratamento de Dados (`tratamento_de_dados.py`)
+* Criada a função `carregar_e_tratar_dados()` para carregar o CSV, limpar vírgulas/nulos e traduzir as colunas para português.
+* **Mudança Crítica:** A função agora retorna uma **tupla** com duas coisas: `df` (os dados) e `traducao_valores` (termos internos do gráfico da árvore).
+
+2. Integração da Abordagem de Estresse (`abordagem_estresse.py`)
+* Removido todo o código repetido de leitura e limpeza de dados que o seu amigo tinha feito.
+* O arquivo agora consome os dados direto do tratamento centralizado.
+* Adicionado um laço para usar o dicionário de tradução da função, deixando os termos técnicos da imagem da árvore (`squared_error`, `samples`, `value`) 100% em português.
+
+3. Adaptação do Vício de Notas (`vicio_de_notas.py`)
+* Adaptado para usar o tratamento centralizado, eliminando o retrabalho de ler o CSV bruto.
+* Atualizado para receber o retorno duplo da função usando o padrão `df, _ = carregar_e_tratar_dados()`, ignorando o dicionário do gráfico e usando as colunas em português no Naïve Bayes e Apriori.
+
+4. Criação do Onboarding (`README.md`)
+* Criado um guia rápido e resumido explicando como instalar as dependências via `requirements.txt` (com e sem `.venv`).
+* Documentado o padrão de "Regra de Ouro" (o desempacotamento com vírgula) para que ninguém quebre o código ao criar novas análises.
